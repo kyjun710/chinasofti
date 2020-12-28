@@ -1,0 +1,30 @@
+server:
+  port: 8000
+spring:
+  #添加3:设置springboot项目的应用名称，并默认启动peer1
+  application:
+    name: chinasofti-member
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/chinasofti-mall-ums?serverTimezone=GMT
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#添加4:eurekaSever的连接信息
+eureka:
+  client:
+    service-url:
+      #defaultZone: http://172.26.125.114:7001/eureka,http://172.26.125.115:7001/eureka,http://172.26.125.118:7001/eureka
+      defaultZone: http://localhost:8761/eureka
+  #向eureka注册Ip信息
+  instance:
+    prefer-ip-address: true
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
+#日志输出，指明日志存放位置；同时需要在资源路径下引入配置文件
+logging:
+  file: logs/chinasofti-member-${server.port}.logs
